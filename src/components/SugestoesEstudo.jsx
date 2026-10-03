@@ -1,278 +1,185 @@
-import { useState } from 'react';
-
-import {
-  gerarSugestoes,
-  sugestaoDisponivel,
-} from '../utils/sugestoes';
-
-import './SugestoesEstudo.css';
-
-function SugestoesEstudo({ rotina, onAlterarEstudo }) {
-  const [preferencias, setPreferencias] = useState({
-    duracao: '30',
-    frequencia: '2',
-    periodo: 'qualquer',
-    margem: '30',
+import { useState } from "react";
+import { sugerir, uid, validarEstudo } from "../utils/modelo";
+import "./SugestoesEstudo.css";
+export default function SugestoesEstudo({ rotina, metas, onAdd }) {
+  const [p, setP] = useState({
+    duracao: 30,
+    quantidade: 2,
+    periodo: "qualquer",
+    margem: 30,
     refeicoes: true,
+    metaId: "",
   });
-
-  const [sugestoes, setSugestoes] = useState([]);
-  const [mensagem, setMensagem] = useState('');
-  const [erros, setErros] = useState([]);
+  const [r, setR] = useState({ sugestoes: [], mensagem: "", erros: [] });
   const [rodada, setRodada] = useState(0);
-
-  function alterarPreferencia(campo, valor) {
-    setPreferencias((atual) => ({
-      ...atual,
-      [campo]: valor,
-    }));
-
-    setSugestoes([]);
-    setMensagem('');
-    setErros([]);
+  const change = (k, v) => {
+    setP({ ...p, [k]: v });
+    setR({ sugestoes: [], mensagem: "", erros: [] });
     setRodada(0);
-  }
-
-  function gerar(proximaRodada = 0) {
-    const resultado = gerarSugestoes(
-      rotina,
-      preferencias,
-      proximaRodada,
-    );
-
-    setSugestoes(resultado.sugestoes);
-    setMensagem(resultado.mensagem);
-    setErros(resultado.erros);
-    setRodada(proximaRodada);
-  }
-
-  function aceitar(sugestao) {
-    // Confere novamente caso a rotina tenha sido editada.
-    if (
-      !sugestaoDisponivel(
-        rotina,
-        preferencias,
-        sugestao,
-      )
-    ) {
-      setSugestoes([]);
-      setMensagem(
-        'Sua rotina mudou ou esse dia já foi reservado. Gere novas sugestões.',
-      );
+  };
+  function gerar(n = 0) {
+    if (!metas.some((m) => m.id === p.metaId)) {
+      setR({
+        sugestoes: [],
+        mensagem: "Escolha a meta que deseja estudar.",
+        erros: [],
+      });
       return;
     }
-
-    const indice = rotina.estudos.findIndex(
-      (item) => item.dia === sugestao.dia,
-    );
-
-    if (indice === -1) return;
-
-    onAlterarEstudo(indice, 'inicio', sugestao.inicio);
-    onAlterarEstudo(indice, 'fim', sugestao.fim);
-    onAlterarEstudo(indice, 'ativo', true);
-
-    setSugestoes((atuais) =>
-      atuais.filter((item) => item.dia !== sugestao.dia),
-    );
-
-    setMensagem(
-      `${sugestao.dia}, das ${sugestao.inicio} às ${sugestao.fim}, adicionado ao seu plano. Você pode ajustar nos campos abaixo.`,
-    );
+    setR(sugerir(rotina, p, n));
+    setRodada(n);
   }
-
+  function aceitar(s) {
+    const novo = { ...s, id: uid(), metaId: p.metaId, atividade: "" };
+    const disponibilidade = sugerir(rotina, { ...p, quantidade: 1 });
+    const erros = validarEstudo(novo, rotina, metas);
+    if (disponibilidade.erros.length || erros.length) {
+      setR({
+        sugestoes: [],
+        mensagem: "Sua rotina mudou. Confira os horários e gere novamente.",
+        erros,
+      });
+      return;
+    }
+    onAdd(novo);
+    setR({
+      ...r,
+      sugestoes: r.sugestoes.filter((x) => x.dia !== s.dia),
+      mensagem: `${s.dia}, ${s.inicio} às ${s.fim}, adicionado. Confira nos períodos de estudo abaixo.`,
+    });
+  }
   return (
-    <section
-      className="assistente-estudos"
-      aria-labelledby="titulo-assistente"
-    >
-      <span className="etiqueta">Uma ajuda para encontrar espaço</span>
-
-      <h3 id="titulo-assistente">
-        Quer sugestões de horários?
-      </h3>
-
+    <section className="suggestions">
+      <span className="eyebrow">Sugestões opcionais</span>
+      <h3>Onde posso encaixar meus estudos?</h3>
       <p>
-        Escolha suas preferências. Você decide quais sugestões
-        aceitar, e seus horários atuais serão mantidos.
+        As sugestões respeitam os compromissos, deslocamentos, sono e estudos já
+        cadastrados.
       </p>
-
-      <div className="preferencias-estudo">
-        <label className="campo">
-          <span>Tempo por sessão</span>
-
+      <div className="grid two">
+        <label>
+          Meta
           <select
-            value={preferencias.duracao}
-            onChange={(evento) =>
-              alterarPreferencia(
-                'duracao',
-                evento.target.value,
-              )
-            }
+            aria-label="Meta"
+            value={p.metaId}
+            onChange={(e) => change("metaId", e.target.value)}
           >
-            <option value="15">15 minutos</option>
-            <option value="30">30 minutos</option>
-            <option value="45">45 minutos</option>
-            <option value="60">1 hora</option>
-          </select>
-        </label>
-
-        <label className="campo">
-          <span>Quantos dias por semana, no total?</span>
-
-          <select
-            value={preferencias.frequencia}
-            onChange={(evento) =>
-              alterarPreferencia(
-                'frequencia',
-                evento.target.value,
-              )
-            }
-          >
-            {[1, 2, 3, 4, 5, 6, 7].map((quantidade) => (
-              <option key={quantidade} value={quantidade}>
-                {quantidade} {quantidade === 1 ? 'dia' : 'dias'}
+            <option value="">Escolha uma meta</option>
+            {metas.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.descricao || "Meta em construção"}
               </option>
             ))}
           </select>
         </label>
-
-        <label className="campo">
-          <span>Período preferido</span>
-
+        <label>
+          Duração
           <select
-            value={preferencias.periodo}
-            onChange={(evento) =>
-              alterarPreferencia(
-                'periodo',
-                evento.target.value,
-              )
-            }
+            aria-label="Duração"
+            value={p.duracao}
+            onChange={(e) => change("duracao", Number(e.target.value))}
           >
-            <option value="qualquer">
-              Sem preferência · 08h às 22h
-            </option>
-
-            <option value="manha">
-              Manhã · 08h às 12h
-            </option>
-
-            <option value="tarde">
-              Tarde · 13h às 18h
-            </option>
-
-            <option value="noite">
-              Noite · 18h às 22h
-            </option>
+            {[15, 30, 45, 60].map((n) => (
+              <option key={n} value={n}>
+                {n} minutos
+              </option>
+            ))}
           </select>
         </label>
-
-        <label className="campo">
-          <span>Intervalo ao redor dos compromissos</span>
-
+        <label>
+          Novos períodos nesta busca
           <select
-            value={preferencias.margem}
-            onChange={(evento) =>
-              alterarPreferencia(
-                'margem',
-                evento.target.value,
-              )
-            }
+            aria-label="Novos períodos nesta busca"
+            value={p.quantidade}
+            onChange={(e) => change("quantidade", Number(e.target.value))}
           >
-            <option value="0">Sem intervalo adicional</option>
-            <option value="15">15 minutos</option>
-            <option value="30">30 minutos</option>
-            <option value="45">45 minutos</option>
-            <option value="60">1 hora</option>
+            {[1, 2, 3, 4, 5, 6, 7].map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Período
+          <select
+            aria-label="Período"
+            value={p.periodo}
+            onChange={(e) => change("periodo", e.target.value)}
+          >
+            <option value="qualquer">Sem preferência · 08h–22h</option>
+            <option value="manha">Manhã · 08h–12h</option>
+            <option value="tarde">Tarde · 13h–18h</option>
+            <option value="noite">Noite · 18h–22h</option>
+          </select>
+        </label>
+        <label>
+          Intervalo ao redor dos compromissos
+          <select
+            aria-label="Intervalo ao redor dos compromissos"
+            value={p.margem}
+            onChange={(e) => change("margem", Number(e.target.value))}
+          >
+            {[0, 15, 30, 45, 60].map((n) => (
+              <option key={n} value={n}>
+                {n} minutos
+              </option>
+            ))}
           </select>
         </label>
       </div>
-
-      <label className="checkbox">
+      <label className="check">
         <input
           type="checkbox"
-          checked={preferencias.refeicoes}
-          onChange={(evento) =>
-            alterarPreferencia(
-              'refeicoes',
-              evento.target.checked,
-            )
-          }
+          checked={p.refeicoes}
+          onChange={(e) => change("refeicoes", e.target.checked)}
         />
-
-        Evitar 12h às 13h e 19h às 20h para refeições
+        Evitar 12h–13h e 19h–20h para refeições
       </label>
-
-      <p className="nota">
-        Se você faz refeições em outros horários, desmarque
-        essa opção e registre os períodos em “Outros compromissos”.
-        Inclua também pausas e lazer que deseja preservar.
+      <p className="hint">
+        Se suas refeições têm outros horários, desmarque a opção e cadastre-as
+        como compromissos. Tempo sem compromisso registrado não garante
+        disponibilidade.
       </p>
-
-      <button type="button" onClick={() => gerar(0)}>
-        Encontrar horários livres
+      <button type="button" onClick={() => gerar()}>
+        Encontrar horários
       </button>
-
-      {mensagem && (
-        <p className="resultado-assistente" role="status">
-          {mensagem}
+      {r.mensagem && (
+        <p role="status" className="notice">
+          {r.mensagem}
         </p>
       )}
-
-      {erros.length > 0 && (
-        <ul className="pendencias-assistente">
-          {erros.map((erro) => (
-            <li key={erro}>{erro}</li>
+      {!!r.erros.length && (
+        <ul className="error">
+          {r.erros.map((e) => (
+            <li key={e}>{e}</li>
           ))}
         </ul>
       )}
-
-      {sugestoes.length > 0 && (
-        <>
-          <div className="lista-sugestoes">
-            {sugestoes.map((sugestao) => (
-              <article
-                className="sugestao-estudo"
-                key={sugestao.dia}
-              >
-                <div>
-                  <strong>{sugestao.dia}</strong>
-
-                  <span className="horario-sugerido">
-                    {sugestao.inicio} às {sugestao.fim}
-                  </span>
-
-                  <small>
-                    Sem conflito com os períodos registrados
-                    e respeitando suas preferências.
-                  </small>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => aceitar(sugestao)}
-                  aria-label={
-                    `Aceitar estudo na ${sugestao.dia}, ` +
-                    `das ${sugestao.inicio} às ${sugestao.fim}`
-                  }
-                >
-                  Aceitar
-                </button>
-              </article>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            className="botao-texto"
-            onClick={() => gerar(rodada + 1)}
-          >
-            Buscar outras opções
-          </button>
-        </>
+      <div className="suggestion-list">
+        {r.sugestoes.map((s) => (
+          <article key={s.dia}>
+            <div>
+              <strong>{s.dia}</strong>
+              <b>
+                {s.inicio} às {s.fim}
+              </b>
+            </div>
+            <button type="button" className="lime" onClick={() => aceitar(s)}>
+              Aceitar
+            </button>
+          </article>
+        ))}
+      </div>
+      {!!r.sugestoes.length && (
+        <button
+          type="button"
+          className="text"
+          onClick={() => gerar(rodada + 1)}
+        >
+          Buscar outras opções
+        </button>
       )}
     </section>
   );
 }
-
-export default SugestoesEstudo;

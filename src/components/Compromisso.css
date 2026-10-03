@@ -1,0 +1,46 @@
+.compromisso {
+  padding: 20px;
+  margin: 24px 0;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--purple);
+  border-radius: 16px;
+  background: #fcfbff;
+}
+.compromisso fieldset:first-of-type {
+  border: 0;
+  padding: 0;
+}
+.days {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.days label {
+  position: relative !important;
+  margin: 0 !important;
+  display: grid !important;
+  place-items: center;
+  min-width: 48px;
+  min-height: 48px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+}
+.days label.selected {
+  color: var(--lime);
+  background: var(--purple);
+  border-color: var(--purple);
+}
+.days label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  clip-path: inset(50%);
+  pointer-events: none;
+  width: 1px;
+  height: 1px;
+}
+.days label:focus-within {
+  outline: 3px solid var(--purple);
+  outline-offset: 3px;
+}

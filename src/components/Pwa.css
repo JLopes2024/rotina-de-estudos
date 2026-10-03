@@ -1,0 +1,11 @@
+.pwa {
+  margin-top: 24px;
+}
+.pwa > p {
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--soft);
+}
+.pwa button {
+  margin: 6px;
+}

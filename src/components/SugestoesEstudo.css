@@ -1,130 +1,42 @@
-.assistente-estudos {
-  margin: 24px 0;
+.suggestions {
   padding: 22px;
   border: 1px solid #c9b8e5;
-  border-top: 5px solid var(--roxo);
   border-radius: 18px;
-  background: var(--roxo-suave);
+  background: var(--soft);
+  margin: 24px 0;
 }
-
-.assistente-estudos > h3 {
-  margin-top: 8px;
-  color: var(--roxo-profundo);
+.suggestions h3 {
   font-size: 23px;
+  margin-top: 10px;
+  color: var(--deep);
 }
-
-.preferencias-estudo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0 18px;
-}
-
-.preferencias-estudo .campo {
-  margin: 16px 0;
-}
-
-.preferencias-estudo select {
-  width: 100%;
-  min-width: 0;
-  min-height: 48px;
-  padding: 12px;
-  border: 1px solid #a99bbb;
-  border-radius: 12px;
-  color: var(--texto);
-  background: white;
-  font: inherit;
-}
-
-.assistente-estudos > .checkbox {
-  align-items: flex-start;
-  margin-top: 12px;
-}
-
-.assistente-estudos > .checkbox input {
-  margin-top: 3px;
-}
-
-.assistente-estudos > button:not(.botao-texto) {
-  margin-top: 8px;
-}
-
-.resultado-assistente {
-  margin-top: 20px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  color: var(--roxo-profundo);
-  background: white;
-}
-
-.pendencias-assistente {
-  color: var(--erro);
-  font-size: 14px;
-}
-
-.lista-sugestoes {
-  display: grid;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-.sugestao-estudo {
+.suggestion-list article {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 18px;
-  padding: 18px;
-  border: 1px solid var(--borda);
-  border-radius: 15px;
+  gap: 16px;
   background: white;
+  padding: 18px;
+  margin-top: 14px;
+  border-radius: 14px;
 }
-
-.sugestao-estudo strong,
-.sugestao-estudo span,
-.sugestao-estudo small {
+.suggestion-list strong,
+.suggestion-list b {
   display: block;
 }
-
-.sugestao-estudo strong {
-  color: var(--roxo);
+.suggestion-list strong {
+  color: var(--purple);
 }
-
-.horario-sugerido {
-  margin-top: 5px;
-  color: var(--texto);
-  font-size: 21px;
-  font-weight: 800;
+.suggestion-list b {
+  font-size: 23px;
+  margin-top: 6px;
 }
-
-.sugestao-estudo small {
-  margin-top: 8px;
-  color: var(--texto-secundario);
-  line-height: 1.5;
-}
-
-.sugestao-estudo button {
-  flex-shrink: 0;
-  border-color: var(--lima);
-  color: var(--texto);
-  background: var(--lima);
-}
-
-.sugestao-estudo button:hover {
-  border-color: #c6df00;
-  background: #c6df00;
-}
-
-@media (max-width: 640px) {
-  .assistente-estudos {
+@media (max-width: 600px) {
+  .suggestions {
     padding: 16px;
   }
-
-  .preferencias-estudo {
-    grid-template-columns: 1fr;
-  }
-
-  .sugestao-estudo {
-    align-items: stretch;
+  .suggestion-list article {
     flex-direction: column;
-    gap: 14px;
+    align-items: stretch;
   }
 }

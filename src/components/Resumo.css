@@ -1,0 +1,150 @@
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 24px 0;
+}
+.stats article {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.stats article:nth-child(3) {
+  background: var(--lime);
+}
+.stats b,
+.stats span {
+  display: block;
+}
+.stats b {
+  font-size: 28px;
+  color: var(--deep);
+}
+.stats span {
+  font-size: 13px;
+  margin-top: 6px;
+}
+.table-scroll {
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  text-align: left;
+}
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+thead {
+  background: var(--soft);
+  color: var(--deep);
+}
+tbody tr:last-child td,
+tbody tr:last-child th {
+  border-bottom: 0;
+}
+.print-goal {
+  padding: 22px;
+  margin: 22px 0;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--purple);
+  border-radius: 16px;
+}
+.print-goal h3 {
+  font-size: 21px;
+  line-height: 1.4;
+}
+.print-goal dl > div {
+  border-top: 1px solid var(--border);
+  padding: 8px 0;
+}
+.print-goal dt {
+  color: var(--purple);
+}
+@media (max-width: 600px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+  .stats article {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .stats span {
+    margin: 0;
+  }
+  th,
+  td {
+    min-width: 80px;
+  }
+}
+@media print {
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .stats article,
+  .stats article:nth-child(3) {
+    display: block;
+    background: white;
+    border-color: #aaa;
+    break-inside: avoid;
+  }
+  .stats b {
+    color: black;
+    font-size: 17pt;
+  }
+  .stats span {
+    margin-top: 6px;
+  }
+  .print-goal {
+    border: 1px solid #aaa;
+    background: white;
+    padding: 14px;
+    border-radius: 0;
+    break-inside: auto;
+  }
+  .print-goal dt {
+    color: black;
+  }
+  thead {
+    display: table-header-group;
+    background: white;
+    color: black;
+  }
+  tr {
+    break-inside: avoid;
+  }
+  .table-scroll {
+    overflow: visible;
+    border-color: #aaa;
+  }
+  table {
+    font-size: 9pt;
+  }
+  th,
+  td {
+    min-width: 0;
+    padding: 8px;
+  }
+  details {
+    display: block;
+    border: 0;
+    padding: 0;
+  }
+  details > summary {
+    display: none;
+  }
+  details > *:not(summary) {
+    display: block !important;
+  }
+  .horizon h2 {
+    break-after: avoid;
+  }
+}

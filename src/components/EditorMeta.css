@@ -1,0 +1,61 @@
+.step-label {
+  margin: 14px 0 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.smart-progress {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+}
+.smart-progress li {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-weight: 800;
+}
+.smart-progress li.current {
+  background: var(--purple);
+  color: var(--lime);
+}
+.question {
+  font-size: 18px;
+}
+.catalog {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0;
+}
+.catalog article {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.catalog h3 {
+  margin-top: 12px;
+}
+.catalog p {
+  font-size: 14px;
+}
+.milestones {
+  margin-top: 26px;
+  border-top: 1px solid var(--border);
+}
+.milestones article {
+  padding: 18px;
+  margin: 16px 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fcfbff;
+}
+@media (max-width: 600px) {
+  .catalog {
+    grid-template-columns: 1fr;
+  }
+}

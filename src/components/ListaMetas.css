@@ -1,0 +1,35 @@
+.goals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.goal-card {
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--purple);
+  border-radius: 18px;
+}
+.goal-card h3 {
+  margin-top: 18px;
+  line-height: 1.45;
+}
+.goal-card .task {
+  border-top: 1px solid var(--border);
+  padding: 8px 0;
+}
+.task small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 3px;
+}
+.empty {
+  padding: 28px;
+  border-radius: 18px;
+  background: var(--soft);
+}
+@media (max-width: 650px) {
+  .goals {
+    grid-template-columns: 1fr;
+  }
+}

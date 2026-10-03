@@ -1,210 +1,165 @@
 .app {
-  width: min(100% - 32px, 900px);
-  margin: 0 auto;
+  width: min(100% - 32px, 1040px);
+  margin: auto;
   padding: 28px 0 36px;
 }
-
-.cabecalho {
+.header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
 }
-
-button.marca {
+.brand {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 0;
   border: 0;
-  border-radius: 8px;
-  color: var(--texto);
-  background: transparent;
+  background: transparent !important;
+  color: var(--ink);
+  padding: 0;
   text-align: left;
 }
-
-.marca-icone {
+.brand > span {
   display: grid;
   place-items: center;
   width: 48px;
   height: 48px;
   border-radius: 15px;
-  color: var(--lima);
-  background: var(--roxo);
+  background: var(--purple);
+  color: var(--lime);
   font-size: 30px;
 }
-
-.marca strong,
-.marca small {
+.brand strong,
+.brand small {
   display: block;
 }
-
-.marca strong {
-  font-size: 22px;
+.brand strong {
+  font-size: 23px;
   letter-spacing: -0.7px;
 }
-
-.marca small {
-  margin-top: 3px;
-  color: var(--texto-secundario);
-  font-size: 12px;
-  font-weight: 400;
+.brand small {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 4px;
 }
-
-button.botao-inicio {
-  padding: 10px 16px;
-  color: var(--roxo);
-  background: white;
-  border-color: var(--borda);
-}
-
-button.botao-inicio:hover {
-  background: var(--roxo-suave);
-  border-color: var(--roxo);
-}
-
-.progresso {
-  display: grid;
-  gap: 10px;
-  margin: 0 4px 22px;
-}
-
-.progresso-legenda {
+.header nav {
   display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 14px;
+  gap: 6px;
+  flex-wrap: wrap;
 }
-
-.progresso-legenda label {
-  font-weight: 750;
+.header nav button {
+  background: white;
+  color: var(--purple);
+  border-color: var(--border);
+  min-height: 42px;
+  padding: 10px 12px;
 }
-
-.progresso-legenda span {
-  color: var(--texto-secundario);
+.header nav button.active {
+  background: var(--purple);
+  color: white;
 }
-
-progress {
-  display: block;
-  width: 100%;
-  height: 10px;
-  overflow: hidden;
-  border: 0;
-  border-radius: 20px;
-  background: var(--borda);
-  accent-color: var(--roxo);
+.panel {
+  background: white;
+  padding: clamp(20px, 4vw, 40px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: 0 16px 40px #35116e0d;
 }
-
-progress::-webkit-progress-bar {
-  border-radius: 20px;
-  background: var(--borda);
-}
-
-progress::-webkit-progress-value {
-  border-radius: 20px;
-  background: var(--roxo);
-}
-
-progress::-moz-progress-bar {
-  border-radius: 20px;
-  background: var(--roxo);
-}
-
-.painel {
-  padding: clamp(22px, 5vw, 44px);
-  border: 1px solid var(--borda);
-  border-radius: 26px;
-  background: var(--superficie);
-  box-shadow: 0 16px 40px rgb(53 17 110 / 6%);
-}
-
-.painel:focus {
+.panel:focus {
   outline: none;
 }
-
-.mensagem-erro {
-  margin-bottom: 28px;
-  padding: 18px;
-  border: 1px solid #dda2af;
-  border-left: 5px solid var(--coral);
-  border-radius: 14px;
-  color: var(--erro);
-  background: var(--erro-fundo);
+.hero {
+  background: var(--purple);
+  color: white;
+  padding: clamp(24px, 4vw, 40px);
+  border-radius: 20px;
 }
-
-.mensagem-erro ul {
-  margin-bottom: 0;
-  padding-left: 20px;
+.hero .eyebrow {
+  display: inline-block;
+  background: var(--lime);
+  color: var(--ink);
+  border-radius: 30px;
+  padding: 8px 12px;
 }
-
-.rodape {
+.hero h1 {
+  font-size: clamp(34px, 5vw, 55px);
+  letter-spacing: -1.7px;
+}
+.hero p {
+  color: #eee6ff;
+  max-width: 660px;
+}
+.hero :focus-visible {
+  outline-color: var(--lime);
+}
+.home-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 24px 0;
+}
+.home-cards article {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.home-cards b {
+  font-size: 36px;
+  color: var(--purple);
+}
+.home-cards h2 {
+  font-size: 20px;
+  margin: 8px 0;
+}
+.backup {
+  border-top: 1px solid var(--border);
   margin-top: 28px;
-  padding: 0 12px;
-  color: var(--texto-secundario);
+}
+footer {
   text-align: center;
-}
-
-.aviso-salvamento {
-  margin-bottom: 6px;
-  font-size: 13px;
-}
-
-.rodape small {
+  color: var(--muted);
   font-size: 12px;
+  margin-top: 24px;
 }
-
-@media (max-width: 640px) {
+footer p {
+  margin-bottom: 4px;
+}
+@media (max-width: 650px) {
   .app {
-    width: min(100% - 24px, 900px);
+    width: calc(100% - 24px);
     padding-top: 18px;
   }
-
-  .cabecalho {
-    gap: 8px;
-    margin-bottom: 24px;
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
   }
-
-  .marca strong {
-    font-size: 18px;
+  .header nav {
+    width: 100%;
   }
-
-  .marca small {
-    max-width: 170px;
-    font-size: 11px;
+  .header nav button {
+    flex: 1;
   }
-
-  .marca-icone {
-    width: 40px;
-    height: 40px;
+  .home-cards {
+    grid-template-columns: 1fr;
   }
-
-  button.botao-inicio {
-    padding: 8px 10px;
-    font-size: 13px;
+  .hero .actions {
+    align-items: stretch;
+    flex-direction: column;
   }
-
-  .painel {
-    border-radius: 20px;
+  .panel {
+    border-radius: 18px;
   }
 }
-
 @media print {
   .app {
     width: 100%;
     padding: 0;
   }
-
-  .cabecalho,
-  .progresso,
-  .rodape {
-    display: none;
-  }
-
-  .painel {
-    padding: 0;
+  .panel {
     border: 0;
-    border-radius: 0;
     box-shadow: none;
+    padding: 0;
+    border-radius: 0;
   }
 }

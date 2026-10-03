@@ -1,0 +1,43 @@
+.block {
+  padding: 22px;
+  margin: 26px 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+.block > h2 {
+  margin-top: 0;
+}
+.study {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--lime);
+  border-radius: 15px;
+  background: #fcfbff;
+}
+.week {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.week article {
+  padding: 16px;
+  background: #fcfbff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.week h3 {
+  color: var(--purple);
+}
+.week p {
+  font-size: 13px;
+}
+@media (max-width: 600px) {
+  .block,
+  .study {
+    padding: 16px;
+  }
+  .week {
+    grid-template-columns: 1fr;
+  }
+}
