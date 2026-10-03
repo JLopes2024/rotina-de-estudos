@@ -1,0 +1,150 @@
+.painel.inicio {
+  border-color: var(--roxo);
+  background: var(--roxo);
+  box-shadow: 0 18px 45px rgb(91 33 182 / 18%);
+}
+
+.inicio > .etiqueta {
+  padding: 8px 12px;
+  border-radius: 30px;
+  color: var(--texto);
+  background: var(--lima);
+  font-size: 11px;
+}
+
+.inicio h1 {
+  max-width: 680px;
+  margin-top: 20px;
+  color: white;
+  font-size: clamp(34px, 5vw, 52px);
+  letter-spacing: -1.8px;
+}
+
+.inicio .descricao-inicio {
+  max-width: 600px;
+  margin-bottom: 28px;
+  color: #eee6ff;
+  font-size: 18px;
+}
+
+.inicio-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.inicio-acoes > button {
+  border-color: var(--lima);
+  color: var(--texto);
+  background: var(--lima);
+}
+
+.inicio-acoes > button:hover {
+  border-color: #e6ff50;
+  background: #e6ff50;
+}
+
+.inicio-acoes > button.secundario {
+  border-color: #bda3e5;
+  color: white;
+  background: transparent;
+}
+
+.inicio-acoes > button.secundario:hover {
+  border-color: white;
+  background: var(--roxo-profundo);
+}
+
+.inicio-acoes > button.botao-texto {
+  border-color: transparent;
+  color: white;
+  background: transparent;
+}
+
+.inicio-acoes > button.botao-texto:hover {
+  background: var(--roxo-profundo);
+}
+
+.inicio > .nota {
+  color: #eee6ff;
+}
+
+.inicio :focus-visible {
+  outline-color: var(--lima);
+}
+
+.passos-inicio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.passos-inicio article {
+  padding: 20px;
+  border: 1px solid white;
+  border-radius: 18px;
+  background: white;
+}
+
+.passos-inicio article > span {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  color: var(--roxo);
+  background: var(--roxo-suave);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.passos-inicio article:nth-child(2) > span {
+  color: var(--texto);
+  background: var(--lima);
+}
+
+.passos-inicio article:nth-child(3) > span {
+  color: #8a1730;
+  background: #ffe0e7;
+}
+
+.passos-inicio h2 {
+  margin: 16px 0 8px;
+  color: var(--texto);
+  font-size: 18px;
+}
+
+.passos-inicio p {
+  margin-bottom: 0;
+  color: var(--texto-secundario);
+  font-size: 14px;
+}
+
+.inicio .instrucoes {
+  margin-top: 28px;
+  border-color: #9471c7;
+  color: white;
+  background: var(--roxo-profundo);
+}
+
+.inicio .instrucoes summary,
+.inicio .instrucoes p {
+  color: white;
+}
+
+@media (max-width: 640px) {
+  .inicio-acoes {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .passos-inicio {
+    grid-template-columns: 1fr;
+  }
+
+  .inicio h1 {
+    letter-spacing: -1.2px;
+  }
+}

@@ -1,0 +1,28 @@
+.navegacao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.navegacao button {
+  min-width: 120px;
+}
+
+.navegacao button[type="submit"] {
+  box-shadow: 0 6px 16px rgb(91 33 182 / 16%);
+}
+
+@media (max-width: 400px) {
+  .navegacao button {
+    min-width: 0;
+    padding: 13px 16px;
+  }
+}
+
+@media print {
+  .navegacao {
+    display: none;
+  }
+}

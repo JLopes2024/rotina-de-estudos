@@ -1,0 +1,94 @@
+.smart-indicador {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.smart-indicador li {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border: 1px solid var(--borda);
+  border-radius: 13px;
+  color: var(--texto-secundario);
+  background: #fcfbff;
+  font-weight: 850;
+}
+
+.smart-indicador li.atual {
+  border-color: var(--roxo);
+  color: var(--lima);
+  background: var(--roxo);
+  box-shadow: 0 5px 12px rgb(91 33 182 / 15%);
+}
+
+.smart-indicador li.anterior {
+  border-color: #bba3de;
+  color: var(--roxo);
+  background: var(--roxo-suave);
+}
+
+.tela-smart .pergunta {
+  font-size: 18px;
+}
+
+.tela-smart .contexto {
+  margin: 24px 0;
+  padding: 20px;
+  border: 1px solid #d2c4e9;
+  border-left: 5px solid var(--roxo);
+  border-radius: 15px;
+  background: var(--roxo-suave);
+}
+
+.tela-smart .contexto > strong {
+  color: var(--roxo-profundo);
+}
+
+.tela-smart .contexto > p {
+  margin-bottom: 0;
+  color: var(--texto);
+}
+
+.tela-smart .contexto details {
+  padding: 0;
+  border: 0;
+  margin-top: 6px;
+}
+
+.tela-smart .contexto summary {
+  padding-bottom: 4px;
+  color: var(--roxo-profundo);
+}
+
+.tela-smart > .campo textarea {
+  min-height: 180px;
+}
+
+.tela-smart .exemplo {
+  border-color: #d2c4e9;
+  background: #fcfbff;
+}
+
+.tela-smart .exemplo summary {
+  color: var(--roxo);
+}
+
+@media (max-width: 400px) {
+  .smart-indicador {
+    gap: 8px;
+  }
+
+  .smart-indicador li {
+    width: 38px;
+    height: 38px;
+  }
+
+  .tela-smart .contexto {
+    padding: 16px;
+  }
+}

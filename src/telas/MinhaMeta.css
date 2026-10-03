@@ -1,0 +1,134 @@
+.tela-meta > .campo {
+  margin-top: 28px;
+}
+
+.tela-meta > .campo textarea {
+  min-height: 150px;
+  border-left: 4px solid var(--roxo);
+}
+
+.tela-meta fieldset {
+  margin-top: 28px;
+  padding: 18px;
+  background: #fcfbff;
+}
+
+.tela-meta legend {
+  color: var(--roxo);
+}
+
+.tela-meta .checkbox {
+  gap: 14px;
+  margin: 10px 0;
+  padding: 14px;
+  border: 1px solid var(--borda);
+  border-radius: 13px;
+  background: white;
+  font-weight: 650;
+}
+
+.tela-meta .checkbox:hover {
+  border-color: var(--roxo);
+  background: var(--roxo-suave);
+}
+
+.tela-meta > p:last-child {
+  padding: 14px 16px;
+  border-left: 4px solid var(--lima);
+  border-radius: 10px;
+  background: var(--roxo-suave);
+  color: var(--roxo-profundo);
+  font-size: 14px;
+}
+
+.banco-metas {
+  margin: 26px 0;
+  background: #fcfbff;
+}
+
+.banco-metas > summary {
+  color: var(--roxo);
+}
+
+.banco-metas select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px;
+  border: 1px solid #a99bbb;
+  border-radius: 12px;
+  color: var(--texto);
+  background: white;
+  font: inherit;
+}
+
+.lista-metas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.cartao-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  background: white;
+}
+
+.cartao-meta.meta-selecionada {
+  border-color: var(--roxo);
+  box-shadow: inset 0 0 0 1px var(--roxo);
+}
+
+.categoria-meta {
+  margin-bottom: 12px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: var(--roxo-profundo);
+  background: var(--roxo-suave);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.cartao-meta h3 {
+  margin-bottom: 6px;
+}
+
+.cartao-meta > p {
+  font-size: 14px;
+}
+
+.cartao-meta .primeiro-passo {
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--fundo);
+}
+
+.cartao-meta > button {
+  margin-top: auto;
+}
+
+.referencia-meta {
+  margin: 20px 0;
+  padding: 18px;
+  border-left: 5px solid var(--lima);
+  border-radius: 14px;
+  background: var(--roxo-suave);
+}
+
+.referencia-meta > strong {
+  color: var(--roxo-profundo);
+}
+
+.referencia-meta p {
+  font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .lista-metas {
+    grid-template-columns: 1fr;
+  }
+}

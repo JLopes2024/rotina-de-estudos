@@ -1,0 +1,247 @@
+.tela-rotina > h1 {
+  max-width: 650px;
+}
+
+.cartao-compromisso,
+.bloco-rotina {
+  margin-top: 26px;
+  padding: 22px;
+  border: 1px solid var(--borda);
+  border-radius: 18px;
+  background: #fcfbff;
+}
+
+.cartao-compromisso {
+  border-top: 4px solid var(--roxo);
+}
+
+.cartao-compromisso > h2,
+.bloco-rotina > h2 {
+  margin-top: 0;
+}
+
+.bloco-rotina .cartao-compromisso {
+  padding: 18px;
+  background: white;
+}
+
+.tela-rotina .seletor-dias,
+.tela-rotina .modo-horario,
+.tela-rotina .opcoes-escola {
+  padding: 0;
+  border: 0;
+}
+
+.tela-rotina .seletor-dias legend,
+.tela-rotina .modo-horario legend,
+.tela-rotina .opcoes-escola legend {
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.dias-semana {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dia-opcao {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 54px;
+  min-height: 48px;
+  padding: 10px;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  color: var(--texto-secundario);
+  background: white;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.dia-opcao input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.dia-opcao:focus-within {
+  outline: 3px solid var(--roxo);
+  outline-offset: 3px;
+}
+
+.dia-opcao.selecionado {
+  border-color: var(--roxo);
+  color: var(--lima);
+  background: var(--roxo);
+}
+
+.tela-rotina .horarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.tela-rotina input[type="number"] {
+  width: 100%;
+  min-width: 0;
+  padding: 14px 15px;
+  border: 1px solid #a99bbb;
+  border-radius: 13px;
+  color: var(--texto);
+  background: #fdfcff;
+}
+
+.tela-rotina input[type="number"]:focus {
+  background: white;
+}
+
+.tela-rotina .horario-por-dia {
+  margin-bottom: 14px;
+  background: white;
+}
+
+.horario-por-dia .campo {
+  margin: 12px 0;
+}
+
+.confirmacao-horarios {
+  padding: 16px;
+  border-left: 4px solid var(--roxo);
+  border-radius: 12px;
+  color: var(--roxo-profundo);
+  background: var(--roxo-suave);
+}
+
+.confirmacao-horarios ul {
+  margin-bottom: 0;
+  padding-left: 20px;
+}
+
+.erro-horario {
+  margin-top: 0;
+  color: var(--erro);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.outro-compromisso {
+  margin: 20px 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--borda);
+}
+
+.tela-rotina button.remover-compromisso {
+  color: var(--erro);
+}
+
+.bloco-estudos {
+  margin-top: 32px;
+  border-top: 5px solid var(--lima);
+  background: white;
+}
+
+.bloco-estudos fieldset {
+  background: #fcfbff;
+}
+
+.conflitos-rotina {
+  padding: 18px;
+  border: 1px solid #dda2af;
+  border-radius: 14px;
+  color: var(--erro);
+  background: var(--erro-fundo);
+}
+
+.conflitos-rotina ul {
+  margin-bottom: 0;
+  padding-left: 20px;
+}
+
+.resumo-semana {
+  margin-top: 32px;
+}
+
+.semana-cartoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.dia-resumo {
+  padding: 18px;
+  border: 1px solid var(--borda);
+  border-radius: 15px;
+  background: #fcfbff;
+}
+
+.dia-resumo h3 {
+  color: var(--roxo);
+}
+
+.dia-resumo ul {
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dia-resumo li {
+  padding: 10px 0;
+  border-top: 1px solid var(--borda);
+}
+
+.dia-resumo li strong,
+.dia-resumo li span {
+  display: block;
+}
+
+.dia-resumo li span {
+  color: var(--texto-secundario);
+  font-size: 14px;
+}
+
+.dia-resumo .item-estudo {
+  margin-top: 10px;
+  padding: 12px;
+  border: 0;
+  border-radius: 10px;
+  color: var(--texto);
+  background: var(--lima);
+}
+
+.dia-resumo .item-estudo span {
+  color: var(--texto);
+}
+
+.dia-resumo > p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.rotina-anterior {
+  background: var(--roxo-suave);
+}
+
+@media (max-width: 640px) {
+  .cartao-compromisso,
+  .bloco-rotina {
+    padding: 16px;
+  }
+
+  .semana-cartoes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .tela-rotina .horarios {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .dia-opcao {
+    min-width: 48px;
+  }
+}
