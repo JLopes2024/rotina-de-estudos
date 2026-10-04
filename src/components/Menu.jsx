@@ -1,115 +1,67 @@
 import { useEffect, useRef, useState } from "react";
-import "./Menu.css";
-
-const ITENS = [
-  ["inicio", "Início"],
-  ["rotina", "Rotina"],
-  ["metas", "Metas"],
-  ["personas", "Personas"],
-  ["resumo", "Resumo"],
-];
-
-export default function Menu({
-  tela,
-  onNavegar,
-  simulando = false,
-}) {
-  const [aberto, setAberto] = useState(false);
-  const botaoMenu = useRef(null);
-
-  useEffect(() => {
-    setAberto(false);
-  }, [tela]);
-
+export default function Menu({ tela, onNavegar, simulando }) {
+  const [aberto, setAberto] = useState(false),
+    botao = useRef(null);
+  useEffect(() => setAberto(false), [tela]);
   useEffect(() => {
     if (!aberto) return;
-
-    function fecharComEscape(evento) {
-      if (evento.key === "Escape") {
+    const esc = (e) => {
+      if (e.key === "Escape") {
         setAberto(false);
-        botaoMenu.current?.focus();
+        botao.current?.focus();
       }
-    }
-
-    document.addEventListener("keydown", fecharComEscape);
-
-    return () => {
-      document.removeEventListener(
-        "keydown",
-        fecharComEscape,
-      );
     };
+    document.addEventListener("keydown", esc);
+    return () => document.removeEventListener("keydown", esc);
   }, [aberto]);
-
-  function navegar(destino) {
+  const ir = (v) => {
     setAberto(false);
-    onNavegar(destino);
-  }
-
+    onNavegar(v);
+  };
   return (
     <header className="menu-app no-print">
-      <button
-        type="button"
-        className="menu-marca"
-        onClick={() => navegar("inicio")}
-        aria-label="Portas para o Amanhã — início"
-      >
-        <span className="menu-simbolo" aria-hidden="true">
-          ↗
-        </span>
-
-        <span className="menu-marca-texto">
+      <button className="menu-marca" onClick={() => ir("inicio")}>
+        <span aria-hidden="true">↗</span>
+        <span>
           <strong>Portas para o Amanhã</strong>
           <small>Um futuro. Vários caminhos.</small>
         </span>
       </button>
-
       <button
-        type="button"
-        className="menu-toggle"
-        ref={botaoMenu}
+        className="menu-toggle secondary"
+        ref={botao}
         aria-expanded={aberto}
         aria-controls="menu-principal"
-        onClick={() => setAberto((atual) => !atual)}
+        onClick={() => setAberto(!aberto)}
       >
-        <span aria-hidden="true">
-          {aberto ? "✕" : "☰"}
-        </span>
-
-        {aberto ? "Fechar" : "Menu"}
+        {aberto ? "Fechar ✕" : "Menu ☰"}
       </button>
-
       <nav
         id="menu-principal"
-        className={`menu-links ${aberto ? "aberto" : ""}`}
+        className={aberto ? "aberto" : ""}
         aria-label="Navegação principal"
       >
-        {ITENS.map(([destino, titulo]) => (
+        {[
+          ["inicio", "Início"],
+          ["rotina", "Rotina"],
+          ["metas", "Metas"],
+          ["personas", "Personas"],
+          ["resumo", "Resumo"],
+        ].map(([v, t]) => (
           <button
-            type="button"
-            key={destino}
-            className={
-              tela === destino ? "selecionado" : ""
-            }
-            aria-current={
-              tela === destino ? "page" : undefined
-            }
-            onClick={() => navegar(destino)}
+            key={v}
+            aria-current={tela === v ? "page" : undefined}
+            className={tela === v ? "active" : ""}
+            onClick={() => ir(v)}
           >
-            {titulo}
+            {t}
           </button>
         ))}
-
-        <button
-          type="button"
-          className="menu-cta"
-          onClick={() => navegar("rotina")}
-        >
-          {simulando
-            ? "Planejar persona"
-            : "Meu planejamento"}
-
-          <span aria-hidden="true">↗</span>
+        <button className="menu-cta" onClick={() => ir("rotina")}>
+          {simulando ? "Planejar persona" : "Meu planejamento"}{" "}
+          <span className="seta" aria-hidden="true">
+            ↗
+          </span>
         </button>
       </nav>
     </header>

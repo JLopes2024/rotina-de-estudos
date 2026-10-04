@@ -9,14 +9,14 @@ export default defineConfig({
       includeAssets: ["logo.svg"],
       manifest: {
         id: "/",
-        name: "Meu caminho — estudos e metas",
-        short_name: "Meu caminho",
+        name: "Portas para o Amanhã",
+        short_name: "Portas",
         lang: "pt-BR",
         start_url: "/",
         scope: "/",
         display: "standalone",
-        theme_color: "#5b21b6",
-        background_color: "#f5f3ff",
+        theme_color: "#6941c6",
+        background_color: "#faf9fc",
         icons: [
           { src: "pwa-192x192.png", sizes: "192x192", type: "image/png" },
           { src: "pwa-512x512.png", sizes: "512x512", type: "image/png" },

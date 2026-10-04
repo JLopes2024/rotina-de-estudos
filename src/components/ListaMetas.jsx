@@ -5,6 +5,7 @@ import {
   duracao,
 } from "../utils/modelo";
 import "./ListaMetas.css";
+import { Barra } from "./Jornada";
 export default function ListaMetas({
   plano,
   onNova,
@@ -108,6 +109,11 @@ function Card({ m, plano, onEditar, onExcluir, onChange }) {
             {m.etapas.filter((e) => e.concluida).length}/{m.etapas.length}{" "}
             pequenas etapas concluídas
           </p>
+          <Barra
+            valor={m.etapas.filter((e) => e.concluida).length}
+            max={m.etapas.length}
+            label="Pequenas etapas concluídas"
+          />
           {m.etapas.map((e) => (
             <label className="check task" key={e.id}>
               <input

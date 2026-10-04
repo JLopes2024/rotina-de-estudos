@@ -1,0 +1,369 @@
+:root,
+:root[data-tema="claro"] {
+  color-scheme: light;
+
+  --purple: #6941c6;
+  --deep: #35245a;
+  --soft: #f2eef9;
+  --lime: #e4edda;
+  --coral: #a52a44;
+
+  --bg: #faf9fc;
+  --ink: #292631;
+  --muted: #6b6675;
+  --border: #e6e2eb;
+
+  --surface: #ffffff;
+  --raised: #f7f5fb;
+  --field: #fdfcff;
+  --field-border: #a99bbb;
+
+  --primary-hover: #5431a5;
+  --on-primary: #ffffff;
+  --on-sage: #26351e;
+  --sage-hover: #d4e2c5;
+
+  --error-bg: #fff0f3;
+  --dawn: #eee4f2;
+  --float-purple: #dbd1ee;
+  --float-sage: #d3e3bf;
+}
+
+:root[data-tema="escuro"] {
+  color-scheme: dark;
+
+  --purple: #b79af2;
+  --deep: #e3d6fa;
+  --soft: #332a43;
+  --lime: #bdd3a7;
+  --coral: #f4a4b4;
+
+  --bg: #17141f;
+  --ink: #f4f0fa;
+  --muted: #b8aec8;
+  --border: #40364f;
+
+  --surface: #211c2c;
+  --raised: #292235;
+  --field: #2b2438;
+  --field-border: #837491;
+
+  --primary-hover: #cbb3fa;
+  --on-primary: #241638;
+  --on-sage: #26351e;
+  --sage-hover: #cedebd;
+
+  --error-bg: #3b2531;
+  --dawn: #251b32;
+  --float-purple: #352546;
+  --float-sage: #27332a;
+}
+
+/* Base */
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+button {
+  background: var(--purple);
+  color: var(--on-primary);
+}
+
+button:hover {
+  background: var(--primary-hover);
+}
+
+button.secondary,
+button.white {
+  background: var(--surface);
+  color: var(--purple);
+  border-color: var(--border);
+}
+
+button.secondary:hover,
+button.white:hover {
+  background: var(--soft);
+}
+
+button.text {
+  background: transparent;
+  color: var(--purple);
+}
+
+button.text:hover {
+  background: var(--soft);
+}
+
+button.danger {
+  color: var(--coral);
+}
+
+button.lime {
+  background: var(--lime);
+  color: var(--on-sage);
+  border-color: var(--lime);
+}
+
+button.lime:hover {
+  background: var(--sage-hover);
+}
+
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  background: var(--field);
+  color: var(--ink);
+  border-color: var(--field-border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  opacity: 0.7;
+}
+
+.error {
+  background: var(--error-bg);
+  color: var(--coral);
+  border-color: var(--coral);
+}
+
+/* Seletor de tema */
+
+.tema-controle {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px !important;
+  margin: 0 !important;
+  color: var(--muted);
+}
+
+.tema-controle select {
+  width: auto;
+  min-width: 142px;
+  padding: 8px 12px;
+}
+
+.preferencias {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Superfícies */
+
+.panel,
+.menu-app,
+.home-cards article,
+.simulacao-bar,
+.retomar-persona,
+.j-modal,
+.j-toast,
+.porta,
+.suggestion-list article {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.hero,
+.simulacao-resumo,
+.personas .personas-explicacao {
+  background: var(--bg);
+}
+
+.compromisso,
+.study,
+.week article,
+.milestones article,
+.personas .persona-info-grid section {
+  background: var(--raised);
+}
+
+.personas .persona-card {
+  background: var(--surface);
+}
+
+.personas .personas-tag,
+.personas .persona-tags span {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.personas .persona-tags span {
+  color: var(--muted);
+}
+
+.suggestions {
+  border-color: var(--field-border);
+}
+
+.days label {
+  background: var(--surface);
+}
+
+.days label.selected {
+  background: var(--purple);
+  color: var(--on-primary);
+}
+
+.stats article:nth-child(3),
+.stats article:nth-child(3) b {
+  color: var(--on-sage);
+}
+
+/* Menu, portas e etapas */
+
+.menu-app nav .menu-cta {
+  background: var(--purple);
+  color: var(--on-primary);
+}
+
+.menu-app nav .menu-cta:hover {
+  background: var(--primary-hover);
+  color: var(--on-primary);
+}
+
+.porta:hover {
+  background: var(--raised);
+  border-color: var(--field-border);
+}
+
+.mapa-jornada li button span {
+  background: var(--surface);
+}
+
+.mapa-jornada li.feito button span,
+.smart-progress li.current {
+  background: var(--purple);
+  color: var(--on-primary);
+}
+
+.carta-suspense {
+  background: var(--soft);
+  color: var(--deep);
+}
+
+.carta-suspense p {
+  color: var(--muted);
+}
+
+/* Logo estática com contraste no escuro */
+
+:root[data-tema="escuro"] .logo-inicial {
+  filter: brightness(0) invert(1);
+}
+
+/* Fundos e animações */
+
+.ambiente {
+  background: var(--bg);
+}
+
+@keyframes amanhecer {
+  from {
+    background: var(--dawn);
+  }
+
+  to {
+    background: var(--bg);
+  }
+}
+
+@keyframes item-alterado {
+  0% {
+    box-shadow: 0 0 0 3px var(--field-border);
+    background: var(--soft);
+  }
+
+  100% {
+    box-shadow: none;
+  }
+}
+
+.j-modal {
+  box-shadow: 0 16px 60px #00000030;
+}
+
+.j-modal::backdrop {
+  background: #100b1bb8;
+  backdrop-filter: blur(4px);
+}
+
+.j-toast {
+  box-shadow: 0 8px 30px #00000025;
+}
+
+.cena-final {
+  background: linear-gradient(
+    var(--soft),
+    var(--surface)
+  );
+}
+
+/* Celular */
+
+@media (max-width: 600px) {
+  .tema-controle {
+    width: 100%;
+  }
+
+  .tema-controle select {
+    flex: 1;
+  }
+}
+
+/* PDF sempre claro */
+
+@media print {
+  :root,
+  :root[data-tema="claro"],
+  :root[data-tema="escuro"] {
+    color-scheme: light;
+
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --raised: #ffffff;
+    --field: #ffffff;
+
+    --ink: #000000;
+    --muted: #333333;
+    --deep: #000000;
+    --purple: #35245a;
+
+    --border: #aaaaaa;
+    --soft: #f3f3f3;
+    --lime: #eeeeee;
+  }
+
+  html,
+  body,
+  .panel,
+  .print-goal,
+  .week article,
+  .study,
+  .compromisso {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+
+  .tema-controle,
+  .preferencias {
+    display: none !important;
+  }
+
+  :root[data-tema="escuro"] .logo-inicial {
+    filter: none;
+  }
+}

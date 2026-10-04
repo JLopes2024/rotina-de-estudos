@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SMART, HORIZONTES, uid, validarMetaEtapa } from "../utils/modelo";
 import { metas, categoriasMetas, buscarMeta } from "../dados/metas";
 import "./EditorMeta.css";
+import { Barra } from "./Jornada";
 export default function EditorMeta({ meta, onChange, onDone }) {
   const [etapa, setEtapa] = useState(0),
     [categoria, setCategoria] = useState("Todas"),
@@ -38,7 +39,7 @@ export default function EditorMeta({ meta, onChange, onDone }) {
     <form onSubmit={avancar} noValidate>
       <span className="eyebrow">Uma meta, um caminho possível</span>
       <div className="step-label">Etapa {etapa + 1} de 6</div>
-      <progress value={etapa + 1} max="6" />
+      <Barra valor={etapa + 1} max={6} label="Etapas do SMART" />
       {etapa === 0 ? (
         <>
           <h1>Qual é sua meta?</h1>
@@ -141,7 +142,10 @@ export default function EditorMeta({ meta, onChange, onDone }) {
             {SMART.map((x, i) => (
               <li
                 key={x.letra}
-                className={i === etapa - 1 ? "current" : ""}
+                className={[
+                  i === etapa - 1 ? "current" : "",
+                  !validarMetaEtapa(meta, i + 1).length ? "done" : "",
+                ].join(" ")}
                 aria-current={i === etapa - 1 ? "step" : undefined}
               >
                 {x.letra}

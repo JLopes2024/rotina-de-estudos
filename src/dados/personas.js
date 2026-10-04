@@ -1,34 +1,21 @@
 import { compromisso, estadoVazio } from "../utils/modelo";
-
 const EMPRESA = ["Segunda", "Terça", "Quarta", "Quinta"];
 const SEMANA = [...EMPRESA, "Sexta"];
-
-function horario(
+const escola = (nome, dias, inicio, fim, deslocamento = 30) => ({
   nome,
   dias,
   inicio,
   fim,
-  deslocamento = 30,
-  remoto = false,
-) {
-  const base = compromisso(nome);
-
-  return {
-    ...base,
-    inicio,
-    fim,
-    remoto,
-    ida: String(remoto ? 0 : deslocamento),
-    volta: String(remoto ? 0 : deslocamento),
-    dias: base.dias.map((dia) => ({
-      ...dia,
-      ativo: dias.includes(dia.dia),
-      inicio: dias.includes(dia.dia) ? inicio : "",
-      fim: dias.includes(dia.dia) ? fim : "",
-    })),
-  };
-}
-
+  deslocamento,
+});
+const outro = (nome, dias, inicio, fim, remoto = true, deslocamento = 0) => ({
+  nome,
+  dias,
+  inicio,
+  fim,
+  remoto,
+  deslocamento,
+});
 export const PERSONAS = [
   {
     id: "ana",
@@ -36,44 +23,22 @@ export const PERSONAS = [
     idade: 17,
     perfil: "Ensino Médio e responsabilidades familiares",
     historia:
-      "Ana é aprendiz e está no último ano do Ensino Médio. " +
-      "Gosta de biologia e pensa em cursar Enfermagem. " +
-      "Em duas tardes da semana, ajuda a cuidar do irmão.",
+      "Ana é aprendiz e está no último ano do Ensino Médio. Gosta de biologia, pensa em cursar Enfermagem e ajuda a cuidar do irmão em duas tardes.",
     interesses: ["Biologia", "Saúde", "Música"],
     pontosFortes: ["Organização", "Cuidado com as pessoas"],
-    recursos:
-      "Tem celular e internet em casa. Pode usar a biblioteca da escola.",
+    recursos: "Celular, internet em casa e biblioteca da escola.",
     apoio:
-      "Uma professora pode orientar seus estudos. A família pode conversar sobre a divisão das tarefas.",
+      "Uma professora pode orientar os estudos. A família pode conversar sobre a divisão das tarefas.",
     desafio:
-      "Começar a se preparar para o ensino superior, conciliando trabalho, escola e cuidado com o irmão.",
-    reflexao:
-      "Quais períodos de estudo são possíveis sem ocupar todo o descanso da Ana?",
+      "Preparar-se para o ensino superior conciliando trabalho, escola e cuidado com o irmão.",
+    reflexao: "Quais períodos são possíveis sem ocupar todo o descanso da Ana?",
     deslocamento: 50,
     sonoInicio: "23:00",
     sonoFim: "06:30",
-    escola: {
-      nome: "Ensino Médio",
-      dias: SEMANA,
-      inicio: "19:00",
-      fim: "22:00",
-      deslocamento: 30,
-    },
+    escola: escola("Ensino Médio", SEMANA, "19:00", "22:00"),
     outros: [
-      {
-        nome: "Cuidar do irmão",
-        dias: ["Terça", "Quinta"],
-        inicio: "14:00",
-        fim: "16:00",
-        remoto: true,
-      },
-      {
-        nome: "Lazer com amigos",
-        dias: ["Sábado"],
-        inicio: "15:00",
-        fim: "17:00",
-        remoto: true,
-      },
+      outro("Cuidar do irmão", ["Terça", "Quinta"], "14:00", "16:00"),
+      outro("Lazer com amigos", ["Sábado"], "15:00", "17:00"),
     ],
   },
   {
@@ -82,39 +47,20 @@ export const PERSONAS = [
     idade: 18,
     perfil: "Ensino Médio concluído e escolha de curso",
     historia:
-      "Lucas concluiu o Ensino Médio e trabalha como aprendiz. " +
-      "Gosta de tecnologia, mas ainda não decidiu qual curso fazer. " +
-      "Quer retomar o hábito de estudar e conhecer suas possibilidades.",
+      "Lucas concluiu o Ensino Médio e trabalha como aprendiz. Gosta de tecnologia, mas ainda não escolheu um curso. Quer retomar o hábito de estudar.",
     interesses: ["Tecnologia", "Jogos", "Design"],
-    pontosFortes: ["Curiosidade", "Facilidade com ferramentas digitais"],
-    recursos:
-      "Tem computador compartilhado e internet em casa.",
-    apoio:
-      "Pode conversar com o instrutor e com um primo que está na faculdade.",
-    desafio:
-      "Explorar cursos e construir uma rotina gradual de estudos.",
-    reflexao:
-      "Que pequena ação pode ajudar Lucas a escolher um caminho com mais informação?",
+    pontosFortes: ["Curiosidade", "Ferramentas digitais"],
+    recursos: "Computador compartilhado e internet em casa.",
+    apoio: "Instrutor e um primo que está na faculdade.",
+    desafio: "Explorar cursos e construir uma rotina gradual de estudos.",
+    reflexao: "Qual pequena ação ajuda Lucas a escolher com mais informação?",
     deslocamento: 40,
     sonoInicio: "23:00",
     sonoFim: "07:00",
     escola: null,
     outros: [
-      {
-        nome: "Tarefas de casa",
-        dias: ["Segunda", "Quarta"],
-        inicio: "14:00",
-        fim: "15:00",
-        remoto: true,
-      },
-      {
-        nome: "Futebol com amigos",
-        dias: ["Sábado"],
-        inicio: "09:00",
-        fim: "11:00",
-        remoto: false,
-        deslocamento: 15,
-      },
+      outro("Tarefas de casa", ["Segunda", "Quarta"], "14:00", "15:00"),
+      outro("Futebol", ["Sábado"], "09:00", "11:00", false, 15),
     ],
   },
   {
@@ -123,38 +69,32 @@ export const PERSONAS = [
     idade: 19,
     perfil: "Curso técnico e preparação para a faculdade",
     historia:
-      "Beatriz é aprendiz e faz um curso técnico em Administração. " +
-      "Gosta de resolver problemas e quer continuar estudando. " +
-      "Precisa organizar as atividades do técnico e a preparação para o ensino superior.",
+      "Beatriz é aprendiz e cursa Técnico em Administração. Gosta de resolver problemas e quer continuar estudando, conciliando as entregas do técnico.",
     interesses: ["Administração", "Finanças", "Empreendedorismo"],
     pontosFortes: ["Raciocínio prático", "Persistência"],
-    recursos:
-      "Tem celular, computador e materiais do curso técnico.",
-    apoio:
-      "Pode estudar com colegas e pedir orientação aos professores.",
+    recursos: "Celular, computador e materiais do curso.",
+    apoio: "Colegas e professores.",
     desafio:
-      "Conciliar as entregas do curso técnico com a preparação para o ensino superior.",
-    reflexao:
-      "Como distinguir o tempo para as tarefas do técnico e o tempo para a nova meta?",
+      "Conciliar o curso técnico com a preparação para o ensino superior.",
+    reflexao: "Como dividir o tempo entre as entregas atuais e a nova meta?",
     deslocamento: 35,
     sonoInicio: "23:00",
     sonoFim: "06:30",
-    escola: {
-      nome: "Técnico em Administração",
-      dias: ["Terça", "Quinta"],
-      inicio: "19:00",
-      fim: "22:00",
-      deslocamento: 30,
-    },
+    escola: escola(
+      "Técnico em Administração",
+      ["Terça", "Quinta"],
+      "19:00",
+      "22:00",
+    ),
     outros: [
-      {
-        nome: "Atividade física",
-        dias: ["Segunda", "Quarta"],
-        inicio: "17:00",
-        fim: "18:00",
-        remoto: false,
-        deslocamento: 15,
-      },
+      outro(
+        "Atividade física",
+        ["Segunda", "Quarta"],
+        "17:00",
+        "18:00",
+        false,
+        15,
+      ),
     ],
   },
   {
@@ -163,38 +103,19 @@ export const PERSONAS = [
     idade: 20,
     perfil: "Faculdade e deslocamento longo",
     historia:
-      "Rafael é aprendiz e está no primeiro semestre da faculdade. " +
-      "Gosta do curso, mas percebeu que precisa estudar também fora das aulas. " +
-      "Os deslocamentos ocupam uma parte importante do seu dia.",
+      "Rafael é aprendiz e está no primeiro semestre da faculdade. Precisa estudar fora das aulas e os deslocamentos ocupam uma parte importante do dia.",
     interesses: ["Tecnologia", "Projetos", "Cinema"],
     pontosFortes: ["Autonomia", "Trabalho em equipe"],
-    recursos:
-      "Tem notebook e acesso aos materiais digitais da faculdade.",
-    apoio:
-      "Pode procurar monitoria e organizar um grupo de estudos.",
-    desafio:
-      "Criar uma rotina de revisão para acompanhar as disciplinas sem deixar tudo para a véspera.",
+    recursos: "Notebook e materiais digitais da faculdade.",
+    apoio: "Monitoria e grupo de estudos.",
+    desafio: "Revisar as disciplinas sem deixar tudo para a véspera.",
     reflexao:
-      "É melhor planejar poucos períodos sustentáveis ou preencher todos os horários livres?",
+      "É melhor preencher todos os horários ou reservar poucos períodos sustentáveis?",
     deslocamento: 60,
     sonoInicio: "23:30",
     sonoFim: "06:30",
-    escola: {
-      nome: "Faculdade",
-      dias: ["Segunda", "Quarta"],
-      inicio: "18:30",
-      fim: "22:00",
-      deslocamento: 60,
-    },
-    outros: [
-      {
-        nome: "Lazer",
-        dias: ["Sábado"],
-        inicio: "15:00",
-        fim: "18:00",
-        remoto: true,
-      },
-    ],
+    escola: escola("Faculdade", ["Segunda", "Quarta"], "18:30", "22:00", 60),
+    outros: [outro("Lazer", ["Sábado"], "15:00", "18:00")],
   },
   {
     id: "camila",
@@ -202,45 +123,21 @@ export const PERSONAS = [
     idade: 18,
     perfil: "Ensino Médio e recursos digitais limitados",
     historia:
-      "Camila é aprendiz e estuda no Ensino Médio à tarde. " +
-      "Gosta de comunicação e participa de projetos da escola. " +
-      "Tem celular, mas a internet de casa nem sempre funciona bem.",
+      "Camila é aprendiz e estuda à tarde. Gosta de comunicação e participa de projetos da escola. A internet de casa nem sempre funciona bem.",
     interesses: ["Comunicação", "Leitura", "Projetos sociais"],
     pontosFortes: ["Criatividade", "Comunicação"],
     recursos:
-      "Tem livros, cadernos e celular. Pode consultar a biblioteca e perguntar sobre o uso dos computadores da escola.",
-    apoio:
-      "Uma colega pode compartilhar materiais. Os professores podem indicar atividades que funcionem offline.",
-    desafio:
-      "Preparar-se para o ensino superior usando recursos acessíveis e materiais offline.",
-    reflexao:
-      "Quais estudos podem acontecer sem depender de vídeos e internet constante?",
+      "Livros, cadernos, celular e biblioteca. Pode perguntar sobre computadores da escola.",
+    apoio: "Colegas e professores podem compartilhar materiais offline.",
+    desafio: "Preparar-se para o ensino superior usando recursos acessíveis.",
+    reflexao: "Quais estudos não dependem de internet constante?",
     deslocamento: 40,
     sonoInicio: "23:00",
     sonoFim: "06:30",
-    escola: {
-      nome: "Ensino Médio",
-      dias: SEMANA,
-      inicio: "13:30",
-      fim: "18:00",
-      deslocamento: 30,
-    },
+    escola: escola("Ensino Médio", SEMANA, "13:30", "18:00"),
     outros: [
-      {
-        nome: "Projeto de comunicação da escola",
-        dias: ["Sábado"],
-        inicio: "09:00",
-        fim: "11:00",
-        remoto: false,
-        deslocamento: 20,
-      },
-      {
-        nome: "Tempo com a família",
-        dias: ["Domingo"],
-        inicio: "14:00",
-        fim: "17:00",
-        remoto: true,
-      },
+      outro("Projeto de comunicação", ["Sábado"], "09:00", "11:00", false, 20),
+      outro("Tempo com a família", ["Domingo"], "14:00", "17:00"),
     ],
   },
   {
@@ -249,98 +146,59 @@ export const PERSONAS = [
     idade: 21,
     perfil: "Retomada dos estudos",
     historia:
-      "Diego é aprendiz e voltou a estudar pela EJA. " +
-      "Quer concluir a educação básica e conhecer possibilidades de formação. " +
-      "Tem habilidade prática e aprende bem quando relaciona o conteúdo com situações reais.",
+      "Diego é aprendiz e voltou a estudar pela EJA. Quer concluir a educação básica e conhecer novas possibilidades. Aprende bem com exemplos práticos.",
     interesses: ["Logística", "Mecânica", "Esporte"],
-    pontosFortes: ["Resolução de problemas", "Experiência prática"],
-    recursos:
-      "Tem celular e os materiais da EJA. Prefere explicações com exemplos e exercícios.",
-    apoio:
-      "Pode pedir apoio aos professores e estudar com um colega da turma.",
-    desafio:
-      "Construir uma retomada gradual, com metas pequenas e uma rotina possível de manter.",
-    reflexao:
-      "Como começar com uma meta que fortaleça a confiança de Diego?",
+    pontosFortes: ["Resolver problemas", "Experiência prática"],
+    recursos: "Celular e materiais da EJA.",
+    apoio: "Professores e um colega da turma.",
+    desafio: "Retomar os estudos com metas pequenas e uma rotina possível.",
+    reflexao: "Qual primeira meta pode fortalecer a confiança de Diego?",
     deslocamento: 45,
     sonoInicio: "23:00",
     sonoFim: "06:30",
-    escola: {
-      nome: "EJA",
-      dias: ["Terça", "Quinta"],
-      inicio: "19:00",
-      fim: "21:30",
-      deslocamento: 30,
-    },
+    escola: escola("EJA", ["Terça", "Quinta"], "19:00", "21:30"),
     outros: [
-      {
-        nome: "Tarefas de casa",
-        dias: ["Segunda", "Quarta"],
-        inicio: "15:00",
-        fim: "16:00",
-        remoto: true,
-      },
-      {
-        nome: "Atividade física",
-        dias: ["Sábado"],
-        inicio: "09:00",
-        fim: "10:30",
-        remoto: false,
-        deslocamento: 15,
-      },
+      outro("Tarefas de casa", ["Segunda", "Quarta"], "15:00", "16:00"),
+      outro("Atividade física", ["Sábado"], "09:00", "10:30", false, 15),
     ],
   },
 ];
-
+function horario(c) {
+  const base = compromisso(c.nome);
+  return {
+    ...base,
+    inicio: c.inicio,
+    fim: c.fim,
+    remoto: !!c.remoto,
+    ida: String(c.remoto ? 0 : (c.deslocamento ?? 0)),
+    volta: String(c.remoto ? 0 : (c.deslocamento ?? 0)),
+    dias: base.dias.map((d) => ({
+      ...d,
+      ativo: c.dias.includes(d.dia),
+      inicio: c.dias.includes(d.dia) ? c.inicio : "",
+      fim: c.dias.includes(d.dia) ? c.fim : "",
+    })),
+  };
+}
 export function criarPlanoPersona(persona) {
-  const plano = estadoVazio();
-  const agenda = plano.rotina.agenda;
-
-  agenda.empresa = horario(
-    "Empresa",
-    EMPRESA,
-    "08:00",
-    "12:00",
-    persona.deslocamento,
+  const p = estadoVazio(),
+    a = p.rotina.agenda;
+  a.empresa = horario(
+    escola("Empresa", EMPRESA, "08:00", "12:00", persona.deslocamento),
   );
-
-  // A formação substitui o dia de empresa na sexta-feira.
-  agenda.formacao = horario(
-    "Formação de aprendizagem",
-    ["Sexta"],
-    "08:00",
-    "12:00",
-    persona.deslocamento,
-  );
-
-  agenda.estudaAtualmente = persona.escola ? "sim" : "nao";
-
-  if (persona.escola) {
-    const escola = persona.escola;
-
-    agenda.escola = horario(
-      escola.nome,
-      escola.dias,
-      escola.inicio,
-      escola.fim,
-      escola.deslocamento,
-    );
-  }
-
-  agenda.sonoInicio = persona.sonoInicio;
-  agenda.sonoFim = persona.sonoFim;
-
-  agenda.outros = persona.outros.map((item) =>
-    horario(
-      item.nome,
-      item.dias,
-      item.inicio,
-      item.fim,
-      item.deslocamento ?? 0,
-      item.remoto,
+  a.formacao = horario(
+    escola(
+      "Formação de aprendizagem",
+      ["Sexta"],
+      "08:00",
+      "12:00",
+      persona.deslocamento,
     ),
   );
-
-  // Metas e períodos de estudo serão construídos pelo grupo.
-  return plano;
+  a.estudaAtualmente = persona.escola ? "sim" : "nao";
+  if (persona.escola) a.escola = horario(persona.escola);
+  a.sonoInicio = persona.sonoInicio;
+  a.sonoFim = persona.sonoFim;
+  a.outros = persona.outros.map(horario);
+  return p;
 }
