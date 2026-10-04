@@ -1,7 +1,0 @@
-Atualização para meu-caminho-completo-v2
-
-Copie src/App.jsx e src/App.css para a pasta src do seu projeto, substituindo os arquivos existentes.
-Copie public/logo.png para a pasta public. A logo já está incluída com o nome esperado pelo código.
-Depois execute npm run dev.
-
-Esta atualização mantém as funcionalidades e os dados locais do plano. A logo aparece grande sobre fundo branco no Início e se adapta ao celular.

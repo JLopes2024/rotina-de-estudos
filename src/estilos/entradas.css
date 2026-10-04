@@ -1,0 +1,48 @@
+[data-entrada] {
+  opacity: 0;
+
+  transition:
+    opacity 600ms ease,
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  transition-delay: var(--entrada-atraso, 0ms);
+}
+
+[data-entrada="esquerda"] {
+  transform: translate(-18px, 16px);
+}
+
+[data-entrada="direita"] {
+  transform: translate(18px, 16px);
+}
+
+[data-entrada="baixo"] {
+  transform: translateY(28px);
+}
+
+[data-entrada][data-visivel="true"] {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+[data-entrada]:focus-within {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-entrada] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media print {
+  [data-entrada] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
